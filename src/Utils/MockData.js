@@ -1687,7 +1687,7 @@ const resObj =   {
                 "iconType": "EMPTY"
               },
               "promoted": true,
-              "avgRating": "--",
+              "avgRating": "2",
               "totalRatings": 0,
               "new": false
             },
@@ -1837,7 +1837,7 @@ const resObj =   {
                 "iconType": "EMPTY"
               },
               "promoted": false,
-              "avgRating": "--",
+              "avgRating": "3",
               "totalRatings": 0,
               "new": false
             },

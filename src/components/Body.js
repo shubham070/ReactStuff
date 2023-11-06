@@ -1,14 +1,30 @@
+import { useState } from 'react';
 import RestaurantCard from '../components/RestaurantCard';
 
 const Body = (res)=>{
+    
+    const [cards,setCards] = useState(res.res.data.data.cards);
     return(     
         <div className="body">
       
             <div className="Search">Search</div>
+            <div className='filter'>
+                <button className='filter-btn'
+                onClick={()=>{
+                    var filteredCards = cards.filter((x) => 
+                    { return Number(x.data.avgRating) > 4.2
+                        this.cards.set
+                    })
+                    setCards(filteredCards);
+                }
+                }>
+                Top Rated Restaurants
+                </button>
+            </div>
             <div className="res-container">
                 { 
                  
-                  res.res.data.data.cards && res.res.data.data.cards.map((x) => {  
+                  cards.map((x) => {  
                                          
                         return <RestaurantCard key={x.data.id} restaurantData = {x} ></RestaurantCard>
                     })
