@@ -13,7 +13,6 @@ const Body = (res)=>{
                 onClick={()=>{
                     var filteredCards = cards.filter((x) => 
                     { return Number(x.data.avgRating) > 4.2
-                        this.cards.set
                     })
                     setCards(filteredCards);
                 }
