@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "../components/RestaurantCard";
 
-const Body = (res) => {
+const Body = () => {
   const [cards, setCards] = useState([]);//res.res.data.data.cards
   const [filteredCards, setFilteredCards] = useState(cards);
   const [searchText, setSearchText] = useState("");
