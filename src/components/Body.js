@@ -3,6 +3,7 @@ import RestaurantCard from "../components/RestaurantCard";
 
 const Body = (res) => {
   const [cards, setCards] = useState(res.res.data.data.cards);
+  const [filteredCards, setFilteredCards] = useState(cards);
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
@@ -35,6 +36,10 @@ const Body = (res) => {
         <button
           onClick={() => {
             console.log("search clicked");
+            var filteredCards = cards.filter((x) =>
+              x.data.name.toLowerCase().includes(searchText)
+            );
+            setFilteredCards(filteredCards);
           }}
         >
           Search
@@ -45,7 +50,7 @@ const Body = (res) => {
             var filteredCards = cards.filter((x) => {
               return Number(x.data.avgRating) > 4.2;
             });
-            setCards(filteredCards);
+            setFilteredCards(filteredCards);
           }}
         >
           Top Rated Restaurants
@@ -53,7 +58,7 @@ const Body = (res) => {
       </div>
 
       <div className="res-container">
-        {cards.map((x) => {
+        {filteredCards.map((x) => {
           return (
             <RestaurantCard key={x.data.id} restaurantData={x}></RestaurantCard>
           );
