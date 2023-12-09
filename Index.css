@@ -28,11 +28,12 @@
   margin: 5px;
 }
 .res-card {
-  margin: 5px;
-  width: 200px;
-  height: 400px;
-  padding: 5px;
+  margin: 10px;
+  width: 170px;
+  height: 375px;
+  padding: 10px;
   background-color: lightgray;
+  word-wrap: break-word;
 }
 
 .res-card:hover {
@@ -45,7 +46,7 @@
 }
 
 .res-logo {
-  width: 200px;
+  width: 175px;
 }
 
 .filter-btn {
