@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RestaurantCard from "../components/RestaurantCard";
 
 const Body = (res) => {
-  const [cards, setCards] = useState(res.res.data.data.cards);
+  const [cards, setCards] = useState([]);//res.res.data.data.cards
   const [filteredCards, setFilteredCards] = useState(cards);
   const [searchText, setSearchText] = useState("");
 
@@ -12,13 +12,11 @@ const Body = (res) => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5205397&lng=73.8573802&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5205397&lng=73.8573802&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-
     const json = await data.json();
-    console.log(
-      json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants
-    );
+    setCards(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredCards(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);    
   };
 
   return (
@@ -28,16 +26,14 @@ const Body = (res) => {
           className="search-box"
           type="text"
           onChange={(e) => {
-            console.log(e);
             setSearchText(e.target.value);
           }}
           value={searchText}
         />
         <button
           onClick={() => {
-            console.log("search clicked");
             var filteredCards = cards.filter((x) =>
-              x.data.name.toLowerCase().includes(searchText.toLowerCase())
+              x.info.name.toLowerCase().includes(searchText.toLowerCase())
             );
             setFilteredCards(filteredCards);
           }}
@@ -48,7 +44,7 @@ const Body = (res) => {
           className="filter-btn"
           onClick={() => {
             var filteredCards = cards.filter((x) => {
-              return Number(x.data.avgRating) > 4.2;
+              return Number(x.info.avgRating) > 4.2;
             });
             setFilteredCards(filteredCards);
           }}
@@ -59,8 +55,8 @@ const Body = (res) => {
 
       <div className="res-container">
         {filteredCards.map((x) => {
-          return (
-            <RestaurantCard key={x.data.id} restaurantData={x}></RestaurantCard>
+          return (            
+            <RestaurantCard key={x.info.id} restaurantData={x.info}></RestaurantCard>
           );
         })}
       </div>
