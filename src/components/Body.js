@@ -37,7 +37,7 @@ const Body = (res) => {
           onClick={() => {
             console.log("search clicked");
             var filteredCards = cards.filter((x) =>
-              x.data.name.toLowerCase().includes(searchText)
+              x.data.name.toLowerCase().includes(searchText.toLowerCase())
             );
             setFilteredCards(filteredCards);
           }}
