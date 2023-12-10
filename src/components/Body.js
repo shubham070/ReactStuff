@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "../components/RestaurantCard";
+import { Link } from "react-router-dom";
 
 const Body = () => {
-  const [cards, setCards] = useState([]);//res.res.data.data.cards
+  const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState(cards);
   const [searchText, setSearchText] = useState("");
 
@@ -15,8 +16,12 @@ const Body = () => {
       "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5205397&lng=73.8573802&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    setCards(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFilteredCards(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);    
+    setCards(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredCards(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   return (
@@ -55,8 +60,10 @@ const Body = () => {
 
       <div className="res-container">
         {filteredCards.map((x) => {
-          return (            
-            <RestaurantCard key={x.info.id} restaurantData={x.info}></RestaurantCard>
+          return (
+            <Link key={x.info.id} to={"/restaurantMenu/" + x.info.id}>
+              <RestaurantCard restaurantData={x.info}></RestaurantCard>
+            </Link>
           );
         })}
       </div>
