@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "../components/RestaurantCard";
 import { Link } from "react-router-dom";
+import { FOOD_API } from "../Utils/Constants";
 
 const Body = () => {
   const [cards, setCards] = useState([]);
@@ -12,9 +13,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5205397&lng=73.8573802&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(FOOD_API);
     const json = await data.json();
     setCards(
       json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
